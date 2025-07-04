@@ -1,7 +1,10 @@
+import sys
 import pygame
 from constants import *
-from player import *
-from asteroidfield import *
+from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
+from shot import Shot
 
 
 def main():
@@ -35,7 +38,13 @@ def main():
 		for aste in asteroids:
 			if aste.collides_with(player):
 				print("Game over!")
-				sys.exit
+				sys.exit()
+
+			for bullet in shots:
+				if aste.collides_with(bullet):
+					bullet.kill()
+					aste.split()
+					
 
 		screen.fill("black")
 
